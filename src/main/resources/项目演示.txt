@@ -1,6 +1,6 @@
 这个项目演示 springdata 整合 jpa 整合 spring 的简单操作：
 1、 首先，我们要懂得怎么去导这三部分的 jar 包， 其中jpa 我们是使用  hibernate 提供的实现
-		spring部分： （4.2.0）
+		spring部分： （4.3.16.RELEASE）
 				没什么说的，主要就是把 spring 一个核心四个基本点导进来就行了，test 包也导一下吧
 		springdata 部分：
 				核心包 1个（1.6.2）
@@ -12,6 +12,7 @@
 		
 		
 		【注意】 spring data 的jar 包不要太新，如果用到2.0 以后的版本，可能会出现版本问题，一直报错。
+		【注意】 spring-core 的版本原来选择 4.2.0 但是保存到 github 以后说存在案例漏洞，所以就换到更新版本 4.3.16.RELEASE
 
 2、 其次，我们要会spring 与 jpa 的整合：
 		其实就像spring 整合hibernate 的时候一样，多创建一个 entityManagerFactory ，然后把 persistence.xml 里面的参数

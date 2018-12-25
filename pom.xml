@@ -6,7 +6,7 @@
 	<artifactId>JPA-SpringData10086</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<spring.version>4.2.0.RELEASE</spring.version>
+		<spring.version>4.3.16.RELEASE</spring.version>
 		<hibernate.version>5.0.7.Final</hibernate.version>
 		<mysql.driver.version>8.0.12</mysql.driver.version>
 		<spring.data.core.version>1.6.2.RELEASE</spring.data.core.version>
