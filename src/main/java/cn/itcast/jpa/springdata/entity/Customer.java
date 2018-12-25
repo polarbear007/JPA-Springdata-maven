@@ -15,12 +15,13 @@ import javax.persistence.TemporalType;
 @Entity
 public class Customer implements Serializable {
 	private static final long serialVersionUID = -1765874101816408934L;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
 	private Integer cid;
 	private String cname;
 	private Date birth;
 	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Id
+	
 	public Integer getCid() {
 		return cid;
 	}
@@ -46,4 +47,10 @@ public class Customer implements Serializable {
 		this.birth = birth;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [cid=" + cid + ", cname=" + cname + ", birth=" + birth + "]";
+	}
+	
+	
 }

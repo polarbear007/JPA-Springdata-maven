@@ -22,3 +22,5 @@
 		其实不需要整合，只需要我们把 springdata 的jar 包导进来，然后添加 jpa 的命名空间
 		再然后添加一下 <jpa：repository> 标签
 		
+4、 
+		
