@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	<!-- 配置连接池对象 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql:///jpa_springdata10086?serverTimezone=Asia/Shanghai&amp;useSSL=false"/>
+		<property name="user" value="root"/>
+		<property name="password" value="root"/>
+	</bean>
+	
+	<!-- 配置entityManagerFactory 对象 -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+		</property>
+		<property name="packagesToScan" value="cn.itcast.jpa.springdata.entity"/>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+	
+	<!-- 配置事务注解生效 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 配置spring 容器类注解 -->
+	<context:component-scan base-package="cn.itcast.jpa.springdata.*"/>
+	<context:annotation-config/>
+	
+	<!-- 顺便配置aop 事务注解 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<!-- 配置springdata 
+		base-package 是扫描指定 dao 层的包的，因为我们dao层只写接口，需要扫描这个包，让springdata 生成代理对象
+	-->
+	<jpa:repositories 	base-package="cn.itcast.jpa.springdata.dao" 
+						transaction-manager-ref="transactionManager" 
+						entity-manager-factory-ref="entityManagerFactory"
+	/>
+</beans>
