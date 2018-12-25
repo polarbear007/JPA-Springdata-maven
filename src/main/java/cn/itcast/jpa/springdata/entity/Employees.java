@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +39,7 @@ public class Employees implements Serializable {
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Enumerated()
+	@Enumerated(EnumType.STRING)
 	private GenderType gender;
 	
 	@Temporal(TemporalType.DATE)
