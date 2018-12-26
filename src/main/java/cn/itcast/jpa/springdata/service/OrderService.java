@@ -14,7 +14,7 @@ public class OrderService {
 	public OrderDao orderDao;
 	
 	public Order findByOid(Integer oid) {
-		return orderDao.findByOid(oid);
+		return orderDao.findOne(oid);
 	}
 	
 	public List<Order> findByCustomerCid(Integer cid){

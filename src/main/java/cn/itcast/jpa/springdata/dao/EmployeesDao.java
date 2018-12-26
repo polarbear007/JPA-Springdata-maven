@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import cn.itcast.jpa.springdata.entity.Employees;
 import cn.itcast.jpa.springdata.entity.Employees.GenderType;
@@ -29,5 +30,7 @@ public interface EmployeesDao extends JpaRepository<Employees, Integer>{
 	// 查询 lastName 以 d 结尾的
 	List<Employees> getByLastNameEndingWith(String lastName);
 	
+	@Query(value="Select e from Employees e where e.empNo = ?")
+	List<Employees> getByEmpNo(Integer empNo);
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.itcast.jpa.springdata.dao.OrderDao;
 import cn.itcast.jpa.springdata.entity.Customer;
 import cn.itcast.jpa.springdata.entity.Order;
 import cn.itcast.jpa.springdata.service.CustomerService;
@@ -22,8 +23,12 @@ public class SpringdataTest4 {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	private OrderDao orderDao;
+	
+	// 设置关联关系，方便后面的测试
 	@Test
-	public void testSave() {
+	public void test1() {
 		Customer c1 = customerService.findByCid(1);
 		Customer c2 = customerService.findByCid(2);
 		
@@ -44,18 +49,33 @@ public class SpringdataTest4 {
 	}
 	
 	@Test
-	public void testFind() {
-		Order order = orderService.findByOid(1);
-		System.out.println(order);
-	}
-	
-	@Test
-	public void testFind2() {
-		List<Order> list = orderService.findByCustomerCid(1);
-		if(list != null) {
+	public void test2() {
+		List<Order> list = orderDao.findByCustomerCid(1);
+		if(list != null && list.size() > 0) {
 			for (Order order : list) {
 				System.out.println(order);
 			}
 		}
 	}
+	
+	@Test
+	public void test3() {
+		List<Order> list = orderDao.findByCustomerCidAndCustomerCname(1, "周星星");
+		if(list != null && list.size() > 0) {
+			for (Order order : list) {
+				System.out.println(order);
+			}
+		}
+	}
+	
+	@Test
+	public void test4() {
+		List<Order> list = orderDao.findByOidGreaterThanAndCustomerCid(2, 2);
+		if(list != null && list.size() > 0) {
+			for (Order order : list) {
+				System.out.println(order);
+			}
+		}
+	}
+	
 }
