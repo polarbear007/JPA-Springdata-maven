@@ -18,6 +18,18 @@ public class Student implements Serializable {
 	private Integer sid;
 	private String name;
 	private Integer age;
+	
+	public Student() {
+		super();
+	}
+	
+	public Student(Integer sid, Integer age) {
+		super();
+		this.sid = sid;
+		this.age = age;
+	}
+
+
 
 	public Integer getSid() {
 		return sid;
