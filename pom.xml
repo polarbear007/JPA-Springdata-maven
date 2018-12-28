@@ -120,6 +120,14 @@
 		    <version>${hibernate.version}</version>
 		</dependency>
 		
+		<!-- 添加这个jar 包依赖，不然可能会报下面的这个错误 
+			SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder". 
+		 --> 
+		<dependency>
+	      <groupId>org.slf4j</groupId>
+	       	<artifactId>slf4j-nop</artifactId>
+	     	<version>1.7.2</version>
+	   </dependency>
 	</dependencies>
 	<!-- 添加1.8 的jdk 插件 -->
 	<build>
