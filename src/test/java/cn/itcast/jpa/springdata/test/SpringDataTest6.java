@@ -395,4 +395,27 @@ public class SpringDataTest6 {
 			}
 		}
 	}
+	
+	// 演示模糊查询
+	@Test
+	public void test15() {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Employees> query = builder.createQuery(Employees.class);
+		// 确定是从哪一张表查询
+		Root<Employees> root = query.from(Employees.class);
+		// 添加查询条件
+		Predicate condition = builder.like(root.get("lastName"), "_as%");
+		query.where(condition);
+		
+		// 执行查询
+		List<Employees> list = entityManager.createQuery(query)
+											.setFirstResult(0)
+											.setMaxResults(100)
+											.getResultList();
+		if(list != null && list.size() >0) {
+			for (Employees employees : list) {
+				System.out.println(employees);
+			}
+		}
+	}
 }
